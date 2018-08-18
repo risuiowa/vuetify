@@ -348,10 +348,12 @@ export default {
           value: this.value
         },
         ref: 'table',
-        on: {
+        on: Object.assign({
           input: this.dateClick,
           tableDate: value => this.tableDate = value
-        }
+        }, this.$listeners.dblclick && this.type === 'date' ? {
+          dblclick: this.$listeners.dblclick
+        } : {})
       })
     },
     genMonthTable () {
@@ -372,10 +374,12 @@ export default {
           tableDate: `${this.tableYear}`
         },
         ref: 'table',
-        on: {
+        on: Object.assign({
           input: this.monthClick,
           tableDate: value => this.tableDate = value
-        }
+        }, this.$listeners.dblclick && this.type === 'month' ? {
+          dblclick: this.$listeners.dblclick
+        } : {})
       })
     },
     genYears () {
