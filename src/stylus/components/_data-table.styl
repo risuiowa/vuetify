@@ -3,9 +3,6 @@
 
 /* Theme */
 v-datatable($material)
-  caption
-    color: rgba($material.fg-color, $material.primary-text-percent)
-    background-color: $material.cards
   thead
     th.column.sortable
       i
@@ -30,9 +27,7 @@ theme(v-datatable, "v-datatable")
 .v-datatable
   .v-input--selection-controls
     margin: 0
-  caption
-    font-size: 18px
-    text-align: left
+    
   thead
     th.column.sortable
       cursor: pointer
