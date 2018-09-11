@@ -71,6 +71,18 @@ test('VDataTable.vue', ({ mount, compileToFunctions }) => {
     expect('Unable to locate target [data-app]').toHaveBeenTipped()
   })
 
+  it('should set the tables aria-labelledby attribute', () => {
+    const data = dataTableTestData()
+    data.propsData.ariaLabelledby = 'aria-div-id'
+    const wrapper = mount(VDataTable, data)
+
+    const content = wrapper.find('table.v-datatable')[0]
+
+    expect(content.element.getAttribute('aria-labelledby')).toBe('aria-div-id')
+
+    expect('Unable to locate target [data-app]').toHaveBeenTipped()
+  })
+
   it('should match a snapshot - no matching results', () => {
     const data = dataTableTestData()
     data.propsData.search = "asdf"

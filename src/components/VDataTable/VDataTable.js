@@ -2,7 +2,6 @@ import '../../stylus/components/_tables.styl'
 import '../../stylus/components/_data-table.styl'
 
 import DataIterable from '../../mixins/data-iterable'
-
 import Head from './mixins/head'
 import Body from './mixins/body'
 import Foot from './mixins/foot'
@@ -23,6 +22,10 @@ export default {
   mixins: [DataIterable, Head, Body, Foot, Progress],
 
   props: {
+    ariaLabelledby: {
+      type: String,
+      default: null
+    },
     headers: {
       type: Array,
       default: () => []
@@ -66,6 +69,13 @@ export default {
   },
 
   computed: {
+    tableAttributes () {
+      const attributes = {}
+      if (this.ariaLabelledby) {
+        attributes['aria-labelledby'] = this.ariaLabelledby
+      }
+      return attributes
+    },
     classes () {
       return {
         'v-datatable v-table': true,
@@ -105,7 +115,8 @@ export default {
   render (h) {
     const tableOverflow = h(VTableOverflow, {}, [
       h('table', {
-        'class': this.classes
+        'class': this.classes,
+        'attrs': this.tableAttributes
       }, [
         this.genTHead(),
         this.genTBody(),
